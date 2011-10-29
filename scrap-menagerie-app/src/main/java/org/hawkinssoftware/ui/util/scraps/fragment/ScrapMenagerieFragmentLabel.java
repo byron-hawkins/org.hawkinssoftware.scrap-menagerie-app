@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2011 HawkinsSoftware
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Byron Hawkins of HawkinsSoftware
+ */
 package org.hawkinssoftware.ui.util.scraps.fragment;
 
 import java.awt.Color;
@@ -47,8 +57,19 @@ import org.hawkinssoftware.ui.util.scraps.ScrapMenagerieKeyCommand;
 import org.hawkinssoftware.ui.util.scraps.fragment.FragmentCollectionNotification.Command;
 import org.hawkinssoftware.ui.util.scraps.list.ScrapMenagerieListViewport;
 
+/**
+ * DOC comment task awaits.
+ * 
+ * @author Byron Hawkins
+ */
 public class ScrapMenagerieFragmentLabel extends AbstractComposite<ScrapMenagerieFragmentLabel.Component, ScrapMenagerieFragmentLabelPainter>
 {
+	
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	public static class Assembly extends CompositeAssembly<Component, Painter, ScrapMenagerieFragmentLabel>
 	{
 		private static final Color BUTTON_OUTLINE_COLOR = new Color(0x8888888);
@@ -105,6 +126,11 @@ public class ScrapMenagerieFragmentLabel extends AbstractComposite<ScrapMenageri
 		}
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	public static class Component extends AbstractComponent
 	{
 		@Override
@@ -114,6 +140,11 @@ public class ScrapMenagerieFragmentLabel extends AbstractComposite<ScrapMenageri
 		}
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	private class SizeHandler implements BoundedEntity
 	{
 		@Override
@@ -152,6 +183,11 @@ public class ScrapMenagerieFragmentLabel extends AbstractComposite<ScrapMenageri
 
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	public interface Painter
 	{
 		// marker
@@ -186,6 +222,11 @@ public class ScrapMenagerieFragmentLabel extends AbstractComposite<ScrapMenageri
 		viewport = ComponentRegistry.getInstance().getComposite(ScrapMenagerieComponents.FRAGMENT_LIST_ASSEMBLY).getViewport();
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	@DomainRole.Join(membership = DisplayBoundsDomain.class)
 	public class Handler implements UserInterfaceHandler
 	{
@@ -234,6 +275,11 @@ public class ScrapMenagerieFragmentLabel extends AbstractComposite<ScrapMenageri
 		}
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	public class CollectionHandler implements UserInterfaceHandler
 	{
 		public void buttonPressed(ChangePressedStateDirective.Notification press, PendingTransaction transaction)

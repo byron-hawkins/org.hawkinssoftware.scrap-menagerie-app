@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2011 HawkinsSoftware
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Byron Hawkins of HawkinsSoftware
+ */
 package org.hawkinssoftware.ui.util.scraps.fragment;
 
 import java.util.HashMap;
@@ -31,6 +41,11 @@ import org.hawkinssoftware.ui.util.scraps.data.ScrapMenagerieFragment;
 import org.hawkinssoftware.ui.util.scraps.list.ScrapMenagerieListFocusManager;
 import org.hawkinssoftware.ui.util.scraps.list.ScrapMenagerieListViewport;
 
+/**
+ * DOC comment task awaits.
+ * 
+ * @author Byron Hawkins
+ */
 @DomainRole.Join(membership = { ModelListDomain.class, FlyweightCellDomain.class })
 public class ScrapMenagerieFragmentProcessor implements UserInterfaceHandler
 {
@@ -47,11 +62,21 @@ public class ScrapMenagerieFragmentProcessor implements UserInterfaceHandler
 
 	private static final ScrapMenagerieFragmentProcessor INSTANCE = new ScrapMenagerieFragmentProcessor();
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	private interface TextChange
 	{
 		void apply(ScrapMenagerieFragment fragment);
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	private static class Append implements TextChange
 	{
 		private final char c;
@@ -131,6 +156,11 @@ public class ScrapMenagerieFragmentProcessor implements UserInterfaceHandler
 		}
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	private class DataTransformer implements ListDataModel.DataChange<ScrapMenagerieFragment>
 	{
 		private final Map<Integer, Boolean> activations = new HashMap<Integer, Boolean>();
@@ -153,6 +183,11 @@ public class ScrapMenagerieFragmentProcessor implements UserInterfaceHandler
 		}
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	@DomainRole.Join(membership = ModelListDomain.class)
 	private abstract class FragmentListTask extends UserInterfaceTask
 	{
@@ -177,6 +212,11 @@ public class ScrapMenagerieFragmentProcessor implements UserInterfaceHandler
 		} 
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	private class DataChangeTask extends FragmentListTask
 	{
 		DataTransformer transformer = new DataTransformer();
@@ -193,6 +233,11 @@ public class ScrapMenagerieFragmentProcessor implements UserInterfaceHandler
 		}
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	private class AddFragmentTask extends FragmentListTask
 	{
 		@Override
@@ -206,6 +251,11 @@ public class ScrapMenagerieFragmentProcessor implements UserInterfaceHandler
 		}
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	private class RemoveFragmentTask extends FragmentListTask
 	{
 		private int row;

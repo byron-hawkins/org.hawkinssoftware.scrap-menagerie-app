@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2011 HawkinsSoftware
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Byron Hawkins of HawkinsSoftware
+ */
 package org.hawkinssoftware.ui.util.scraps.data;
 
 import org.hawkinssoftware.azia.core.action.TransactionRegistry;
@@ -31,6 +41,11 @@ import org.hawkinssoftware.ui.util.scraps.ScrapMenagerieComponents;
 import org.hawkinssoftware.ui.util.scraps.clip.CurrentClip;
 import org.hawkinssoftware.ui.util.scraps.history.ScrapMenagerieHistoryList;
 
+/**
+ * DOC comment task awaits.
+ * 
+ * @author Byron Hawkins
+ */
 @ValidateRead
 @ValidateWrite
 public class ClipboardHandler implements UserInterfaceHandler, UserInterfaceActorDelegate
@@ -99,6 +114,11 @@ public class ClipboardHandler implements UserInterfaceHandler, UserInterfaceActo
 		ClipboardMonitor.getInstance().putClipboardContents(command.clipboardProvider.getClipboardContents());
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	@DomainRole.Join(membership = { RenderingDomain.class, ModelListDomain.class })
 	private class AddScrap extends UserInterfaceTask
 	{

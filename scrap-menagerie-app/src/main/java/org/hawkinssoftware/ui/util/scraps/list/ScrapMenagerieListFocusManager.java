@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2011 HawkinsSoftware
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Byron Hawkins of HawkinsSoftware
+ */
 package org.hawkinssoftware.ui.util.scraps.list;
 
 import java.awt.Color;
@@ -23,6 +33,11 @@ import org.hawkinssoftware.rns.core.validation.ValidateWrite;
 import org.hawkinssoftware.ui.util.scraps.ScrapMenagerieComponents;
 import org.hawkinssoftware.ui.util.scraps.ScrapMenagerieKeyCommand;
 
+/**
+ * DOC comment task awaits.
+ * 
+ * @author Byron Hawkins
+ */
 public class ScrapMenagerieListFocusManager extends AbstractEventDispatch
 {
 	public static void install()
@@ -35,6 +50,11 @@ public class ScrapMenagerieListFocusManager extends AbstractEventDispatch
 		return INSTANCE;
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	private static class InitializationTask extends InstantiationTask.StandaloneInstantiationTask
 	{
 		InitializationTask()
@@ -84,6 +104,11 @@ public class ScrapMenagerieListFocusManager extends AbstractEventDispatch
 		return focused;
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	private class ViewportBorderPainter extends BorderPlugin<CellViewport>
 	{
 		public ViewportBorderPainter(int thickness)
@@ -109,6 +134,11 @@ public class ScrapMenagerieListFocusManager extends AbstractEventDispatch
 		}
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	public class KeyHandler implements UserInterfaceHandler
 	{
 		public void keyEvent(KeyboardInputNotification key, PendingTransaction transaction)
@@ -127,6 +157,11 @@ public class ScrapMenagerieListFocusManager extends AbstractEventDispatch
 		}
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	public class FocusHandler implements UserInterfaceHandler
 	{
 		private final SetFocusAction action;
@@ -155,6 +190,11 @@ public class ScrapMenagerieListFocusManager extends AbstractEventDispatch
 		}
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	public class SetFocusAction extends UserInterfaceDirective
 	{
 		private final ScrapMenagerieListViewport activate;

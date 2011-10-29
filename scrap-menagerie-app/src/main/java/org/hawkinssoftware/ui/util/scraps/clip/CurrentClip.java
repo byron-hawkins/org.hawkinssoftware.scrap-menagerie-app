@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2011 HawkinsSoftware
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Byron Hawkins of HawkinsSoftware
+ */
 package org.hawkinssoftware.ui.util.scraps.clip;
 
 import java.awt.Color;
@@ -17,8 +27,19 @@ import org.hawkinssoftware.azia.ui.paint.plugin.BackgroundPlugin;
 import org.hawkinssoftware.azia.ui.paint.plugin.BorderPlugin;
 
 // WIP: character '@' is truncated because it has extra-deep descent
+/**
+ * DOC comment task awaits.
+ * 
+ * @author Byron Hawkins
+ */
 public class CurrentClip extends LabelComposite<Label, LabelPainter<Label>>
 {
+	
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	public static class Assembly extends CompositeAssembly<Label, Label.Painter, CurrentClip>
 	{
 		private static final Color BORDER_COLOR = new Color(0x666666);

@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) 2011 HawkinsSoftware
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Byron Hawkins of HawkinsSoftware
+ */
 package org.hawkinssoftware.ui.util.scraps;
 
 import java.awt.Dimension;
@@ -24,6 +34,11 @@ import org.hawkinssoftware.azia.ui.tile.TopTile;
 import org.hawkinssoftware.rns.core.log.Log;
 import org.hawkinssoftware.rns.core.publication.InvocationConstraint;
 
+/**
+ * DOC comment task awaits.
+ * 
+ * @author Byron Hawkins
+ */
 public class ScrapMenagerieConsole
 {
 	private final DesktopWindow<ScrapMenagerieComponents.LayoutKey> window;
@@ -76,6 +91,11 @@ public class ScrapMenagerieConsole
 		return window.getTopTile();
 	}
 
+	/**
+	 * DOC comment task awaits.
+	 * 
+	 * @author Byron Hawkins
+	 */
 	public class VisibilityHandler implements UserInterfaceHandler
 	{
 		private boolean metaOn = false;
