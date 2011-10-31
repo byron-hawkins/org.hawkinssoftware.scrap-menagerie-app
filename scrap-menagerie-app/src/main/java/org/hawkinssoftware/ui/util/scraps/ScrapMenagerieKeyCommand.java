@@ -42,7 +42,7 @@ public enum ScrapMenagerieKeyCommand
 		this.key = key;
 	}
 
-	public static final Set<HardwareKey> META_KEYS = EnumSet.of(HardwareKey.RCONTROL, HardwareKey.G);
+	public static final Set<HardwareKey> META_KEYS = EnumSet.of(HardwareKey.RCONTROL, HardwareKey.E);
 
 	public static ScrapMenagerieKeyCommand getCommand(KeyboardInputEvent event)
 	{
