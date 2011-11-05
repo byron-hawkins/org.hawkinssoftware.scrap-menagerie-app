@@ -32,7 +32,7 @@ A pure Java library, with main class
 
 [scrap-menagerie]: https://github.com/byron-hawkins/org.hawkinssoftware.scrap-menagerie/blob/master/scrap-menagerie/README.md
 [scrap-menagerie-app]: https://github.com/byron-hawkins/org.hawkinssoftware.scrap-menagerie-app/blob/master/scrap-menagerie-app/README.md
-[scrap-menagerie-app.zip]: http://not-there-yet
+[scrap-menagerie-app.zip]: https://oss.sonatype.org/content/repositories/snapshots/org/hawkinssoftware/scrap-menagerie/scrap-menagerie-dist/
 
 #### Features
 

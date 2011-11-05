@@ -1,6 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<artifactId>scrap-menagerie-app</artifactId>
 	<name>scrap-menagerie</name>
 	<url>http://www.hawkinssoftware.net</url>
@@ -83,17 +84,6 @@
 		<pluginManagement>
 			<plugins>
 
-				<!-- Set the Java version for the compiler. -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.1</version>
-					<configuration>
-						<source>1.6</source>
-						<target>1.6</target>
-					</configuration>
-				</plugin>
-
 				<!--Tell Eclipse not to participate in the unpack goal. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
@@ -125,33 +115,31 @@
 						</lifecycleMappingMetadata>
 					</configuration>
 				</plugin>
-				
+
 			</plugins>
 		</pluginManagement>
 	</build>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.hawkinssoftware.rns</groupId>
 			<artifactId>rns-agent</artifactId>
-			<version>0.1-alpha-1-2011.10.28-SNAPSHOT</version>
+			<version>0.1.1-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.hawkinssoftware.azia</groupId>
 			<artifactId>azia-ui</artifactId>
-			<version>0.1-alpha-1-2011.10.28-SNAPSHOT</version>
+			<version>0.1.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
+
 	<parent>
 		<groupId>org.hawkinssoftware.scrap-menagerie</groupId>
 		<artifactId>scrap-menagerie</artifactId>
-		<version>0.1-alpha-1-2011.10.28-SNAPSHOT</version>
-		<relativePath>../scrap-menagerie</relativePath>
+		<version>0.1.1-SNAPSHOT</version>
+		<relativePath>../../project/scrap-menagerie</relativePath>
 	</parent>
+
 </project>

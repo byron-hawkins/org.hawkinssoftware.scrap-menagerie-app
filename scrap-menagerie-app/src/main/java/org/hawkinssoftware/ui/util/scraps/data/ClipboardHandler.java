@@ -51,12 +51,12 @@ import org.hawkinssoftware.ui.util.scraps.history.ScrapMenagerieHistoryList;
 public class ClipboardHandler implements UserInterfaceHandler, UserInterfaceActorDelegate
 {
 	public static void install()
-	{
-		ClipboardEventDispatch.getInstance().installHandler(INSTANCE);
+	{    
+		ClipboardEventDispatch.getInstance().installHandler(INSTANCE); 
 	}
 
 	public static ClipboardHandler getInstance()
-	{
+	{  
 		return INSTANCE;
 	}
 
