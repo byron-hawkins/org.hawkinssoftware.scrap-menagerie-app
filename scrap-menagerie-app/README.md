@@ -11,10 +11,11 @@ A pure Java library, with main class
 #### Installation
 
 * To run the Scrap Menagerie as a standalone application
-    * Get the latest [scrap-menagerie-app.zip] from the Maven repo
+    * Get the latest [scrap-menagerie-app.zip] from the repository
+        + The filename will be scrap-menagerie-dist-0.1.1-########.######-#-app.zip
     * Unzip it anywhere
     * Launch the **scrap-menagerie.bat** file
-        + double-click from Windows Explorer
+        + double-click from Windows Explorer, or
         + **cd** to the directory in a DOS prompt and enter 
           **scrap-menagerie.bat**
 * To run the Scrap Menagerie from Eclipse
