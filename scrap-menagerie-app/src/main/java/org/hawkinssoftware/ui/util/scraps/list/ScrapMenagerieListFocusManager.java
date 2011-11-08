@@ -85,7 +85,7 @@ public class ScrapMenagerieListFocusManager extends AbstractEventDispatch
 	private ScrapMenagerieListViewport focused = null;
 
 	@InvocationConstraint(domains = AssemblyDomain.class)
-	private void initialize()
+	private void initialize() 
 	{
 		historyViewport = ComponentRegistry.getInstance().getComposite(ScrapMenagerieComponents.CLIP_LIST_ASSEMBLY).getViewport();
 		fragmentViewport = ComponentRegistry.getInstance().getComposite(ScrapMenagerieComponents.FRAGMENT_LIST_ASSEMBLY).getViewport();
@@ -95,6 +95,7 @@ public class ScrapMenagerieListFocusManager extends AbstractEventDispatch
 
 		historyViewport.getPainter().borderPlugins.insertPlugin(borderPlugin);
 		fragmentViewport.getPainter().borderPlugins.insertPlugin(borderPlugin);
+		focused = historyViewport;
 
 		KeyEventDispatch.getInstance().installHandler(new KeyHandler());
 	}

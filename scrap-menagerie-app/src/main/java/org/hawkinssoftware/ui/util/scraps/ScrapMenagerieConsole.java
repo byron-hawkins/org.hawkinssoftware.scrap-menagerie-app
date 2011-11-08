@@ -102,7 +102,7 @@ public class ScrapMenagerieConsole
 
 		public void keyEvent(KeyboardInputNotification key, PendingTransaction transaction)
 		{
-			if (ScrapMenagerieKeyCommand.META_KEYS.contains(key.event.key))
+			if (ScrapMenagerieKeyCommand.META_KEYS.contains(key.event.key.logicalKey))
 			{
 				if (metaOn)
 				{
@@ -118,7 +118,7 @@ public class ScrapMenagerieConsole
 				}
 				else
 				{
-					if ((key.event.state == State.DOWN) && key.event.pressedKeys.containsAll(ScrapMenagerieKeyCommand.META_KEYS))
+					if ((key.event.state == State.DOWN) && key.event.pressedLogicalKeys.containsAll(ScrapMenagerieKeyCommand.META_KEYS))
 					{
 						metaOn = true;
 

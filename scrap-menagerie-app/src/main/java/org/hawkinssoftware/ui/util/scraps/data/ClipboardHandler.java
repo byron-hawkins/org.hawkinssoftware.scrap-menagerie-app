@@ -113,6 +113,16 @@ public class ClipboardHandler implements UserInterfaceHandler, UserInterfaceActo
 	{
 		ClipboardMonitor.getInstance().putClipboardContents(command.clipboardProvider.getClipboardContents());
 	}
+	
+	public void transformScrap(TransformScrapCommand transform)
+	{
+		ClipboardMonitor.getInstance().putClipboardContents(transform.clipboardProvider.getClipboardContents());
+	}
+	
+	ClipboardContents getCurrentClip()
+	{
+		return currentClip.getClipboardContents();
+	}
 
 	/**
 	 * DOC comment task awaits.

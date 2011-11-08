@@ -11,15 +11,14 @@ A pure Java library, with main class
 #### Installation
 
 * To run the Scrap Menagerie as a standalone application
-    * Get the latest [scrap-menagerie-app.zip] from the repository
-        + The filename will be scrap-menagerie-dist-0.1.1-########.######-#-app.zip
+    * Get the latest [scrap-menagerie-app.zip]
     * Unzip it anywhere
     * Launch the **scrap-menagerie.bat** file
         + double-click from Windows Explorer, or
         + **cd** to the directory in a DOS prompt and enter 
           **scrap-menagerie.bat**
 * To run the Scrap Menagerie from Eclipse
-    * Import the projects into Eclipse using 
+    * Import these projects into Eclipse using 
       **File > Import... > Maven Projects**
         + [scrap-menagerie]
         + [scrap-menagerie-app]
@@ -33,21 +32,21 @@ A pure Java library, with main class
 
 [scrap-menagerie]: https://github.com/byron-hawkins/org.hawkinssoftware.scrap-menagerie/blob/master/scrap-menagerie/README.md
 [scrap-menagerie-app]: https://github.com/byron-hawkins/org.hawkinssoftware.scrap-menagerie-app/blob/master/scrap-menagerie-app/README.md
-[scrap-menagerie-app.zip]: https://oss.sonatype.org/content/repositories/snapshots/org/hawkinssoftware/scrap-menagerie/scrap-menagerie-dist/
+[scrap-menagerie-app.zip]: http://www.hawkinssoftware.net/oss/bin/scrap-menagerie-app.zip
 
 #### Features
 
 1. **System Clipboard monitor**
     * The contents of the system clipboard are displayed
         + The clipboard is continuously monitored for changes
-2. **Clipboard History**
+1. **Clipboard History**
     * Each change to the clipboard causes a new entry to be added
       to the history list. 
         + Duplicate entries will be automatically removed
     * To re-copy a clip from the history list:
         + Select the clip in the history list
         + Press the **Re-Copy** button 
-3. **Typing Fragments**
+1. **Typing Fragments**
     * Capture keyboard input into a fragment for later copying
         + Press the "+" button above the list to create a fragment
         + Click the toggle button on the fragment list item to 
@@ -61,24 +60,35 @@ A pure Java library, with main class
     * To remove a fragment:
         + Select the fragment 
         + Press the "-" button above the list 
-4. **Pin**
+1. **Clipboard Text Transforms**
+    1. Change the capitalization of the first letter of the 
+       current clipboard contents. 
+        * When writing code, this automatically changes a copied 
+          classname into a relatable variable name
+    1. Simplify the current clipboard contents to plain text
+        * Removes the formatting from text copied out of a Word 
+          document or an HTML web page
+        * Reduces a set of copied files to a comma-separated list
+          of filenames (path excluded)
+1. **Pin**
     * The console is "always on top" when pinned
         + Click the pin and click away to hide it
     * Raise the console by pressing the keyboard trigger
-        + Currently it is hardcoded to **ctrl+E**
+        + The default is **ctrl+E**
+            - See the **Shortcuts** section to customize
         + The mouse buttons works while keys are pressed on the 
           keyboard (thanks to [azia-native-input]), so you can pin 
           the console while it is raised 
         
 [azia-native-input]: https://github.com/byron-hawkins/org.hawkinssoftware.azia-native-input/blob/master/azia-native-input/README.md
         
-##### Shortcuts
+#### Shortcuts
 
 The Scrap Menagerie traps and consumes all keystrokes that occur 
 while its special keyboard trigger is active. 
 
-* The trigger is currently hardcoded to **ctrl+E**
-* Each of the following key shortcuts implies **ctrl+E+key**.
+* The default trigger is **ctrl+E**
+* Each of the following key shortcuts implies **Trigger+Key**.
 
 <table border="1" cellpadding="3" style="margin-left: 10px">
 	<tr>
@@ -102,6 +112,16 @@ while its special keyboard trigger is active.
     	<td>Re-copy the selected item from the focused list</td>
     </tr>
     <tr>
+    	<td>8</td>
+    	<td>Change the capitalization of the first letter of the
+	    	current clipboard contents</td>
+    </tr>
+    <tr>
+    	<td>9</td>
+    	<td>Simplify the current clipboard contents to plain 
+    		text</td>
+    </tr>
+    <tr>
     	<td>0</td>
     	<td>Toggle capture on the selected fragment (if any)</td>
     </tr>
@@ -117,7 +137,16 @@ while its special keyboard trigger is active.
     	<td>P</td>
     	<td>Toggle the Scrap Menagerie console pin</td>
     </tr>
-</table>        
-        
+</table>      
+
+Customize your shortcut keys by placing a file named 
+**shortcuts.properties** anywhere on the classpath (most easily
+the installation root, next to the **scrap-menagerie.bat** file).
+The file format is the standard [Java properties][properties] 
+format. Find an example of the property names inside the 
+**/lib/scrap-menagerie*.jar** file at 
+**/config/default-shortcuts.properties**.
+
+[properties]: http://en.wikipedia.org/wiki/.properties    
         
         

@@ -20,6 +20,7 @@ import org.hawkinssoftware.rns.core.role.CoreDomains.InitializationDomain;
 import org.hawkinssoftware.rns.core.role.DomainRole;
 import org.hawkinssoftware.ui.util.scraps.data.ClipboardHandler;
 import org.hawkinssoftware.ui.util.scraps.data.ReCopyHandler;
+import org.hawkinssoftware.ui.util.scraps.data.ScrapTransformHandler;
 import org.hawkinssoftware.ui.util.scraps.fragment.ScrapMenagerieFragmentProcessor;
 import org.hawkinssoftware.ui.util.scraps.list.ScrapMenagerieListFocusManager;
 
@@ -48,10 +49,12 @@ public class ScrapMenagerieMain
 			Log.out(Tag.CRITICAL, e, "Failed to assemble the Scrap Menagerie application.");
 		}
 
+		ScrapMenagerieKeyCommand.initialize();
 		ClipboardHandler.install();
 		ScrapMenagerieLayoutHandler.install();
 		ScrapMenagerieFragmentProcessor.install();
 		ReCopyHandler.install();
+		ScrapTransformHandler.install();
 		ScrapMenagerieListFocusManager.install();
 
 		ScrapMenagerieComponents.getInstance().setConsole(new ScrapMenagerieConsole(assemblyTask.window));
