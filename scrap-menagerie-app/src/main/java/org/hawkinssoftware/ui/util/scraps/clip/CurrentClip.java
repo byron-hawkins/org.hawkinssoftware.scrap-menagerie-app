@@ -13,18 +13,24 @@ package org.hawkinssoftware.ui.util.scraps.clip;
 import java.awt.Color;
 
 import org.hawkinssoftware.azia.core.action.UserInterfaceActor.SynchronizationRole;
+import org.hawkinssoftware.azia.core.role.UserInterfaceDomains.DisplayBoundsDomain;
 import org.hawkinssoftware.azia.input.clipboard.ClipboardContents;
 import org.hawkinssoftware.azia.ui.component.AbstractComponent;
 import org.hawkinssoftware.azia.ui.component.ComponentEnclosure;
+import org.hawkinssoftware.azia.ui.component.PartialBounds;
 import org.hawkinssoftware.azia.ui.component.composition.CompositeAssembly;
 import org.hawkinssoftware.azia.ui.component.text.Label;
 import org.hawkinssoftware.azia.ui.component.text.LabelComposite;
 import org.hawkinssoftware.azia.ui.component.text.handler.PlainTextHandler;
 import org.hawkinssoftware.azia.ui.paint.InstancePainter;
+import org.hawkinssoftware.azia.ui.paint.InstancePainter.TextMetrics;
+import org.hawkinssoftware.azia.ui.paint.InstancePainter.TextMetrics.BoundsType;
 import org.hawkinssoftware.azia.ui.paint.basic.text.LabelPainter;
 import org.hawkinssoftware.azia.ui.paint.canvas.Inset;
 import org.hawkinssoftware.azia.ui.paint.plugin.BackgroundPlugin;
 import org.hawkinssoftware.azia.ui.paint.plugin.BorderPlugin;
+import org.hawkinssoftware.azia.ui.paint.plugin.LabelTextPlugin;
+import org.hawkinssoftware.rns.core.role.DomainRole;
 
 // WIP: character '@' is truncated because it has extra-deep descent
 /**
@@ -34,7 +40,6 @@ import org.hawkinssoftware.azia.ui.paint.plugin.BorderPlugin;
  */
 public class CurrentClip extends LabelComposite<Label, LabelPainter<Label>>
 {
-	
 	/**
 	 * DOC comment task awaits.
 	 * 
@@ -65,6 +70,8 @@ public class CurrentClip extends LabelComposite<Label, LabelPainter<Label>>
 			enclosure.getPainter().borderPlugins.clearPlugins();
 			enclosure.getPainter().borderPlugins.insertPlugin(new BorderPlugin.Solid<Label>(BORDER_COLOR));
 			enclosure.getPainter().borderPlugins.insertPlugin(new BorderPlugin.Empty<Label>(Inset.homogenous(4)));
+			((LabelTextPlugin) enclosure.getPainter().getLabelPlugin()).mergeFixedBounds(new PartialBounds(null, null, null, (int) TextMetrics.INSTANCE
+					.getBounds("I!/\"^|@gyjqp", BoundsType.GLYPH).getHeight()));
 		}
 	}
 

@@ -13,10 +13,15 @@ package org.hawkinssoftware.ui.util.scraps.list;
 import org.hawkinssoftware.azia.core.action.UserInterfaceActor;
 import org.hawkinssoftware.azia.core.action.UserInterfaceActorDelegate;
 import org.hawkinssoftware.azia.core.action.UserInterfaceTransaction.ActorBasedContributor.PendingTransaction;
+import org.hawkinssoftware.azia.core.layout.Axis;
+import org.hawkinssoftware.azia.core.role.UserInterfaceDomains.DisplayBoundsDomain;
 import org.hawkinssoftware.azia.ui.component.UserInterfaceHandler;
 import org.hawkinssoftware.azia.ui.component.cell.CellViewportComposite;
 import org.hawkinssoftware.azia.ui.component.composition.CompositionElement;
 import org.hawkinssoftware.azia.ui.component.composition.CompositionRegistry;
+import org.hawkinssoftware.azia.ui.component.scalar.ScrollPaneComposite;
+import org.hawkinssoftware.azia.ui.component.scalar.ScrollPaneViewportComposite;
+import org.hawkinssoftware.azia.ui.component.scalar.transaction.MoveViewportOriginDirective;
 import org.hawkinssoftware.azia.ui.component.transaction.key.KeyEventDispatch;
 import org.hawkinssoftware.azia.ui.component.transaction.key.KeyboardInputNotification;
 import org.hawkinssoftware.azia.ui.model.RowAddress.Section;
@@ -35,7 +40,7 @@ import org.hawkinssoftware.ui.util.scraps.ScrapMenagerieKeyCommand;
  * 
  * @author Byron Hawkins
  */
-@DomainRole.Join(membership = ModelListDomain.class)
+@DomainRole.Join(membership = { ModelListDomain.class, ScrollPaneViewportComposite.ScrollPaneViewportDomain.class, DisplayBoundsDomain.class })
 public class ScrapMenagerieListSelection implements UserInterfaceHandler, UserInterfaceActorDelegate, CompositionElement.Initializing
 {
 	private ListDataModel model;
@@ -74,7 +79,7 @@ public class ScrapMenagerieListSelection implements UserInterfaceHandler, UserIn
 		// WIP: how to handle multiple row removals in the transaction? Either I need to see the whole transaction, or I
 		// need some kind of notification having all rows in it--or I'll have to keep track of every row change, which
 		// is outside the scope of this class.
-		
+
 		switch (change.type)
 		{
 			case ADD:
@@ -101,6 +106,22 @@ public class ScrapMenagerieListSelection implements UserInterfaceHandler, UserIn
 	{
 		viewport.getCellPainter().repaint(viewport.createAddress(selectedRow, Section.SCROLLABLE));
 		viewport.getCellPainter().repaint(viewport.createAddress(notification.row, Section.SCROLLABLE));
+
+		if (viewport.getCellPainter().isRowFullyVisible(selectedRow) && !viewport.getCellPainter().isRowFullyVisible(notification.row))
+		{
+			Axis.Span rowSpan = viewport.getCellPainter().getRowSpan(Section.SCROLLABLE, Axis.V, notification.row);
+			int y;
+
+			if (viewport.getComponent().yViewport() > rowSpan.position)
+			{
+				y = rowSpan.position;
+			}
+			else
+			{
+				y = rowSpan.position - (viewport.getBounds().height - rowSpan.span);
+			}
+			transaction.contribute(new MoveViewportOriginDirective(viewport.getComponent(), 0, y));
+		}
 	}
 
 	public void keyEvent(KeyboardInputNotification event, PendingTransaction transaction)
@@ -122,6 +143,35 @@ public class ScrapMenagerieListSelection implements UserInterfaceHandler, UserIn
 				if (selectedRow < (model.getRowCount(Section.SCROLLABLE) - 1))
 				{
 					transaction.contribute(new SetSelectedRowDirective(viewport.getComponent(), selectedRow + 1));
+				}
+				break;
+			case SELECTION_PAGE_UP:
+				if (selectedRow > 0)
+				{
+					Axis.Span selectedRowSpan = viewport.getCellPainter().getRowSpan(Section.SCROLLABLE, Axis.V, selectedRow);
+					int previousPageTop = Math.max(0, selectedRowSpan.position - viewport.getBounds().height);
+					int previousPageRow = viewport.getCellPainter().getRowAtPosition(previousPageTop);
+					if (viewport.getCellPainter().getRowSpan(Section.SCROLLABLE, Axis.V, previousPageRow).position < previousPageTop)
+					{
+						previousPageRow++;
+					}
+					transaction.contribute(new SetSelectedRowDirective(viewport.getComponent(), previousPageRow));
+				}
+				break;
+			case SELECTION_PAGE_DOWN:
+				if (selectedRow < (model.getRowCount(Section.SCROLLABLE) - 1))
+				{
+					Axis.Span selectedRowSpan = viewport.getCellPainter().getRowSpan(Section.SCROLLABLE, Axis.V, selectedRow);
+					int nextPageTop = Math.min(viewport.getCellPainter().getScrollableContentSize(Axis.V), selectedRowSpan.position
+							+ viewport.getBounds().height);
+					int nextPageRow = viewport.getCellPainter().getRowAtPosition(nextPageTop);
+					transaction.contribute(new SetSelectedRowDirective(viewport.getComponent(), Math.min(model.getRowCount(Section.SCROLLABLE), nextPageRow)));
+				}
+				break;
+			case SELECTION_TOP:
+				if (selectedRow > 0)
+				{
+					transaction.contribute(new SetSelectedRowDirective(viewport.getComponent(), 0));
 				}
 				break;
 		}

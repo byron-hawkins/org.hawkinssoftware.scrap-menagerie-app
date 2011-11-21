@@ -19,6 +19,7 @@ import org.hawkinssoftware.azia.core.action.UserInterfaceTransaction.ActorBasedC
 import org.hawkinssoftware.azia.core.log.AziaLogging.Tag;
 import org.hawkinssoftware.azia.core.role.UserInterfaceDomains.RenderingDomain;
 import org.hawkinssoftware.azia.input.clipboard.ClipboardContents;
+import org.hawkinssoftware.azia.input.clipboard.ClipboardContentsMap;
 import org.hawkinssoftware.azia.input.clipboard.ClipboardMonitor;
 import org.hawkinssoftware.azia.ui.component.ComponentRegistry;
 import org.hawkinssoftware.azia.ui.component.PaintableActorDelegate;
@@ -51,21 +52,25 @@ import org.hawkinssoftware.ui.util.scraps.history.ScrapMenagerieHistoryList;
 public class ClipboardHandler implements UserInterfaceHandler, UserInterfaceActorDelegate
 {
 	public static void install()
-	{    
-		ClipboardEventDispatch.getInstance().installHandler(INSTANCE); 
+	{
+		ClipboardEventDispatch.getInstance().installHandler(INSTANCE);
 	}
 
 	public static ClipboardHandler getInstance()
-	{  
+	{
 		return INSTANCE;
 	}
 
 	private static final ClipboardHandler INSTANCE = new ClipboardHandler();
 
+	private static final int MAX_CLIP_COUNT = 100;
+
 	private final PaintableActorDelegate currentClipActor;
 	private final ScrapMenagerieHistoryList list;
 
 	private ScrapMenagerieItem currentClip;
+
+	private ClipboardContentsMap<Integer> clipUsageMap = new ClipboardContentsMap<Integer>();
 
 	public ClipboardHandler()
 	{
@@ -76,7 +81,7 @@ public class ClipboardHandler implements UserInterfaceHandler, UserInterfaceActo
 		currentClip = new ScrapMenagerieItem(currentContents, CurrentClip.summarize(currentContents));
 	}
 
-	@Override 
+	@Override
 	public UserInterfaceActor getActor()
 	{
 		return currentClipActor.getActor();
@@ -111,14 +116,26 @@ public class ClipboardHandler implements UserInterfaceHandler, UserInterfaceActo
 
 	public void reCopy(ReCopyCommand command)
 	{
-		ClipboardMonitor.getInstance().putClipboardContents(command.clipboardProvider.getClipboardContents());
+		ClipboardContents contents = command.clipboardProvider.getClipboardContents();
+		ClipboardMonitor.getInstance().putClipboardContents(contents);
+
+		Integer usage = clipUsageMap.get(contents);
+		if (usage == null)
+		{
+			usage = 1;
+		}
+		else
+		{
+			usage = usage + 1;
+		}
+		clipUsageMap.put(contents, usage);
 	}
-	
+
 	public void transformScrap(TransformScrapCommand transform)
 	{
 		ClipboardMonitor.getInstance().putClipboardContents(transform.clipboardProvider.getClipboardContents());
 	}
-	
+
 	ClipboardContents getCurrentClip()
 	{
 		return currentClip.getClipboardContents();
@@ -147,6 +164,9 @@ public class ClipboardHandler implements UserInterfaceHandler, UserInterfaceActo
 			ListDataModel.Session session = list.getModel().createSession(getTransaction(ListDataModelTransaction.class));
 
 			// remove dups, going in reverse order to avoid index confusion
+			boolean removedDuplicate = false;
+			int obsoletionCandidate = -1;
+			int minUsage = Integer.MAX_VALUE;
 			for (int i = list.getModel().getRowCount(Section.SCROLLABLE) - 1; i >= 0; i--)
 			{
 				RowAddress address = list.getViewport().createAddress(i, Section.SCROLLABLE);
@@ -154,7 +174,27 @@ public class ClipboardHandler implements UserInterfaceHandler, UserInterfaceActo
 				if (existingItem.getClipboardContents().equals(pendingContents))
 				{
 					session.remove(i);
+					removedDuplicate = true;
 				}
+				else
+				{
+					Integer itemUsage = clipUsageMap.get(existingItem.getClipboardContents());
+					if (itemUsage == null)
+					{
+						itemUsage = 0;
+					}
+					if (minUsage > itemUsage)
+					{
+						minUsage = itemUsage;
+						obsoletionCandidate = i;
+					}
+				}
+			}
+
+			// only obsoleting a row when no duplicate was removed, so sequence integrity is safe (horky, but works...)
+			if ((obsoletionCandidate >= 0) && (list.getModel().getRowCount(Section.SCROLLABLE) >= MAX_CLIP_COUNT) && !removedDuplicate)
+			{
+				session.remove(obsoletionCandidate);
 			}
 
 			// insert after removals to avoid row index confusion

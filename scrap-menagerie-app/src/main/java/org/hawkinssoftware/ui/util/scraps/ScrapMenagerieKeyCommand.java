@@ -35,8 +35,11 @@ import org.hawkinssoftware.rns.core.log.Log;
  */
 public enum ScrapMenagerieKeyCommand
 {
-	SELECTION_DOWN("MoveSelectionDown"),
 	SELECTION_UP("MoveSelectionUp"),
+	SELECTION_DOWN("MoveSelectionDown"),
+	SELECTION_PAGE_UP("MoveSelectionPageUp"),
+	SELECTION_PAGE_DOWN("MoveSelectionPageDown"),
+	SELECTION_TOP("MoveSelectionToTop"),
 	RE_COPY("ReCopy"),
 	CHANGE_LEADING_CASE("ChangeLeadingCase"),
 	REDUCE_TO_PLAIN_TEXT("ReduceToPlainText"),

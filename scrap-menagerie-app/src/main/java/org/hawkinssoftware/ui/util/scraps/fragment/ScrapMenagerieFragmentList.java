@@ -29,7 +29,6 @@ import org.hawkinssoftware.ui.util.scraps.list.ScrapMenagerieListViewport;
 @DomainRole.Join(membership = ModelListDomain.class)
 public class ScrapMenagerieFragmentList extends ScrollPaneComposite<ScrapMenagerieListViewport>
 {
-	
 	/**
 	 * DOC comment task awaits.
 	 * 

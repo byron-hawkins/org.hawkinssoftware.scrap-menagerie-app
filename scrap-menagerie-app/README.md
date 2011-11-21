@@ -96,20 +96,32 @@ while its special keyboard trigger is active.
 		<th>Feature</th>
 	</tr>
     <tr>
-    	<td>7</td>
-    	<td>Toggle focus between the lists</td>
-    </tr>
-    <tr>
-    	<td>up-arrow</td>
+    	<td>&lt;up-arrow&gt;</td>
     	<td>Move the focused list selection up</td>
     </tr>
     <tr>
-    	<td>down-arrow</td>
+    	<td>&lt;down-arrow&gt;</td>
     	<td>Move the focused list selection down</td>
     </tr>
     <tr>
-    	<td>6</td>
+    	<td>&lt;page-up&gt;</td>
+    	<td>Move the focused list selection up a page</td>
+    </tr>
+    <tr>
+    	<td>&lt;page-down&gt;</td>
+    	<td>Move the focused list selection down a page</td>
+    </tr>
+    <tr>
+    	<td>&lt;enter&gt;</td>
     	<td>Re-copy the selected item from the focused list</td>
+    </tr>
+    <tr>
+    	<td>6</td>
+    	<td>Move the focused list selection to the top</td>
+    </tr>
+    <tr>
+    	<td>7</td>
+    	<td>Toggle focus between the lists</td>
     </tr>
     <tr>
     	<td>8</td>
