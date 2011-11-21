@@ -74,7 +74,7 @@ A pure Java library, with main class
     * The console is "always on top" when pinned
         + Click the pin and click away to hide it
     * Raise the console by pressing the keyboard trigger
-        + The default is **ctrl+E**
+        + The default is **ctrl+D**
             - See the **Shortcuts** section to customize
         + The mouse buttons works while keys are pressed on the 
           keyboard (thanks to [azia-native-input]), so you can pin 
@@ -87,7 +87,7 @@ A pure Java library, with main class
 The Scrap Menagerie traps and consumes all keystrokes that occur 
 while its special keyboard trigger is active. 
 
-* The default trigger is **ctrl+E**
+* The default trigger is **ctrl+D**
 * Each of the following key shortcuts implies **Trigger+Key**.
 
 <table border="1" cellpadding="3" style="margin-left: 10px">
