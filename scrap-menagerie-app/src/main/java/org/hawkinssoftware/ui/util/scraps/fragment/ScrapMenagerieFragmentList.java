@@ -21,7 +21,8 @@ import org.hawkinssoftware.ui.util.scraps.list.ScrapMenagerieListSelection;
 import org.hawkinssoftware.ui.util.scraps.list.ScrapMenagerieListViewport;
 
 /**
- * DOC comment task awaits.
+ * The list of typing-capture fragments on the right side of the Scrap Menagerie application window. It's a
+ * <code>ScrollPane</code> with a list-bearing viewport.
  * 
  * @author Byron Hawkins
  */
@@ -30,7 +31,7 @@ import org.hawkinssoftware.ui.util.scraps.list.ScrapMenagerieListViewport;
 public class ScrapMenagerieFragmentList extends ScrollPaneComposite<ScrapMenagerieListViewport>
 {
 	/**
-	 * DOC comment task awaits.
+	 * Assembly for the scroll pane containing the <code>ScrapMenagerieFragmentList</code>.
 	 * 
 	 * @author Byron Hawkins
 	 */
@@ -44,7 +45,7 @@ public class ScrapMenagerieFragmentList extends ScrollPaneComposite<ScrapMenager
 
 	private final ListDataModel model = new ListDataModel();
 	private final ScrapMenagerieFragmentStampFactory stampFactory = new ScrapMenagerieFragmentStampFactory();
-	
+
 	@InvocationConstraint
 	public ScrapMenagerieFragmentList(ScrollPane component)
 	{
@@ -54,7 +55,7 @@ public class ScrapMenagerieFragmentList extends ScrollPaneComposite<ScrapMenager
 	public ListDataModel getModel()
 	{
 		return model;
-	} 
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override

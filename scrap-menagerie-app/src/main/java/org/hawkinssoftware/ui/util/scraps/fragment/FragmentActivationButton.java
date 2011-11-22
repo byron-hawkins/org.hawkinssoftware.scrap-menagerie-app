@@ -33,7 +33,9 @@ import org.hawkinssoftware.ui.util.scraps.data.ScrapMenagerieFragment;
 import org.hawkinssoftware.ui.util.scraps.list.ScrapMenagerieListViewport;
 
 /**
- * DOC comment task awaits.
+ * The toggle button inside each typing-capture fragment list item, which populate the list on the right side of the
+ * Scrap Menagerie application window. The button is a flyweight cell stamp; live instances capable of user interaction
+ * are represented by the transitory <code>InteractiveInstance</code> within.
  * 
  * @author Byron Hawkins
  */
@@ -53,7 +55,7 @@ public class FragmentActivationButton implements CompositionElement.Initializing
 	{
 		this.span = span;
 		this.footprint = footprint;
-		
+
 		inset = (footprint - span) / 2;
 	}
 
@@ -83,7 +85,9 @@ public class FragmentActivationButton implements CompositionElement.Initializing
 	}
 
 	/**
-	 * DOC comment task awaits.
+	 * User interaction behaviors of an instance stamped by the enclosing <code>FragmentActivationButton</code>.
+	 * Instances are transitory, having meaningful state only during user interaction transactions involving one such
+	 * button.
 	 * 
 	 * @author Byron Hawkins
 	 */
@@ -112,7 +116,8 @@ public class FragmentActivationButton implements CompositionElement.Initializing
 		}
 
 		/**
-		 * DOC comment task awaits.
+		 * Transforming handler: button clicks toggle the <code>active</code> state of the typing capture cell
+		 * associated with this button.
 		 * 
 		 * @author Byron Hawkins
 		 */
@@ -135,7 +140,8 @@ public class FragmentActivationButton implements CompositionElement.Initializing
 		}
 
 		/**
-		 * DOC comment task awaits.
+		 * Transaction contribution for changing the <code>active</code> state of the enclosing typing capture list
+		 * cell.
 		 * 
 		 * @author Byron Hawkins
 		 */
