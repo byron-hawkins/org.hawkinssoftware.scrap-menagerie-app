@@ -15,6 +15,7 @@ import org.hawkinssoftware.azia.core.action.UserInterfaceTask;
 import org.hawkinssoftware.azia.core.log.AziaLogging.Tag;
 import org.hawkinssoftware.azia.core.role.UserInterfaceDomains.AssemblyDomain;
 import org.hawkinssoftware.azia.ui.AziaUserInterfaceInitializer;
+import org.hawkinssoftware.azia.ui.component.transaction.window.ApplicationFocusHandler;
 import org.hawkinssoftware.rns.core.log.Log;
 import org.hawkinssoftware.rns.core.role.CoreDomains.InitializationDomain;
 import org.hawkinssoftware.rns.core.role.DomainRole;
@@ -43,6 +44,7 @@ public class ScrapMenagerieMain
 
 		try
 		{
+			ApplicationFocusHandler.install();
 			TransactionRegistry.executeTask(assemblyTask);
 		}
 		catch (UserInterfaceTask.ConcurrentAccessException e)
