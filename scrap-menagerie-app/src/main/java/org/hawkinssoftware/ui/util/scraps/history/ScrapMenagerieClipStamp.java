@@ -19,6 +19,7 @@ import org.hawkinssoftware.azia.core.layout.Axis;
 import org.hawkinssoftware.azia.core.role.UserInterfaceDomains.FlyweightCellDomain;
 import org.hawkinssoftware.azia.input.MouseInputEvent.Button;
 import org.hawkinssoftware.azia.ui.component.UserInterfaceHandler;
+import org.hawkinssoftware.azia.ui.component.cell.transaction.SetSelectedRowDirective;
 import org.hawkinssoftware.azia.ui.component.composition.CompositionElement;
 import org.hawkinssoftware.azia.ui.component.composition.CompositionRegistry;
 import org.hawkinssoftware.azia.ui.input.MouseAware.EventPass;
@@ -37,7 +38,6 @@ import org.hawkinssoftware.rns.core.validation.ValidateWrite;
 import org.hawkinssoftware.ui.util.scraps.data.ScrapMenagerieItem;
 import org.hawkinssoftware.ui.util.scraps.list.ScrapMenagerieListSelection;
 import org.hawkinssoftware.ui.util.scraps.list.ScrapMenagerieListViewport;
-import org.hawkinssoftware.ui.util.scraps.list.SetSelectedRowDirective;
 
 /**
  * DOC comment task awaits.

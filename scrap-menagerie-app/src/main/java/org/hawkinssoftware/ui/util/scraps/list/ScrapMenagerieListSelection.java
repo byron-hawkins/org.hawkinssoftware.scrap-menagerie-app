@@ -17,9 +17,9 @@ import org.hawkinssoftware.azia.core.layout.Axis;
 import org.hawkinssoftware.azia.core.role.UserInterfaceDomains.DisplayBoundsDomain;
 import org.hawkinssoftware.azia.ui.component.UserInterfaceHandler;
 import org.hawkinssoftware.azia.ui.component.cell.CellViewportComposite;
+import org.hawkinssoftware.azia.ui.component.cell.transaction.SetSelectedRowDirective;
 import org.hawkinssoftware.azia.ui.component.composition.CompositionElement;
 import org.hawkinssoftware.azia.ui.component.composition.CompositionRegistry;
-import org.hawkinssoftware.azia.ui.component.scalar.ScrollPaneComposite;
 import org.hawkinssoftware.azia.ui.component.scalar.ScrollPaneViewportComposite;
 import org.hawkinssoftware.azia.ui.component.scalar.transaction.MoveViewportOriginDirective;
 import org.hawkinssoftware.azia.ui.component.transaction.key.KeyEventDispatch;
@@ -29,6 +29,7 @@ import org.hawkinssoftware.azia.ui.model.list.ListDataModel;
 import org.hawkinssoftware.azia.ui.model.list.ListDataModel.DataChangeNotification;
 import org.hawkinssoftware.azia.ui.model.list.ListDataModel.ModelListDomain;
 import org.hawkinssoftware.azia.ui.paint.basic.cell.ListModelPainter;
+import org.hawkinssoftware.azia.ui.paint.basic.cell.ListModelPainter.RowVisibilityType;
 import org.hawkinssoftware.rns.core.role.DomainRole;
 import org.hawkinssoftware.rns.core.validation.ValidateRead;
 import org.hawkinssoftware.rns.core.validation.ValidateWrite;
@@ -107,7 +108,8 @@ public class ScrapMenagerieListSelection implements UserInterfaceHandler, UserIn
 		viewport.getCellPainter().repaint(viewport.createAddress(selectedRow, Section.SCROLLABLE));
 		viewport.getCellPainter().repaint(viewport.createAddress(notification.row, Section.SCROLLABLE));
 
-		if (viewport.getCellPainter().isRowFullyVisible(selectedRow) && !viewport.getCellPainter().isRowFullyVisible(notification.row))
+		if ((selectedRow >= 0) && viewport.getCellPainter().isRowVisible(selectedRow, RowVisibilityType.IGNORE_PARTIAL)
+				&& !viewport.getCellPainter().isRowVisible(notification.row, RowVisibilityType.IGNORE_PARTIAL))
 		{
 			Axis.Span rowSpan = viewport.getCellPainter().getRowSpan(Section.SCROLLABLE, Axis.V, notification.row);
 			int y;

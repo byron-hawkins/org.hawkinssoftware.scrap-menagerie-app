@@ -37,6 +37,7 @@ public class ScrapMenagerieMain
 	private void start()
 	{
 		AziaUserInterfaceInitializer.initialize();
+		AziaUserInterfaceInitializer.initializeClipboardEvents();
 		Log.addTagFilter(Tag.NO_SUBSYSTEMS_UP_TO_DEBUG);
 		Log.addTagFilter(org.hawkinssoftware.rns.core.util.RNSLogging.Tag.EVERYTHING);
 

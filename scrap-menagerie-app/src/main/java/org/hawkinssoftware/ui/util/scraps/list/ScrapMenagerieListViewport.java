@@ -57,10 +57,4 @@ public class ScrapMenagerieListViewport extends CellViewportComposite<ListModelP
 		selection = new ScrapMenagerieListSelection();
 		installHandler(selection);
 	}
-
-	@Override
-	public RowAddress createAddress(int row, Section section)
-	{
-		return new RowAddress(getComponent(), row, section);
-	}
 }

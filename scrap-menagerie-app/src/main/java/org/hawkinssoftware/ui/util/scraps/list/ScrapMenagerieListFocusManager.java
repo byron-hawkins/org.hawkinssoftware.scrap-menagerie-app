@@ -16,6 +16,7 @@ import org.hawkinssoftware.azia.core.action.InstantiationTask;
 import org.hawkinssoftware.azia.core.action.UserInterfaceDirective;
 import org.hawkinssoftware.azia.core.role.UserInterfaceDomains.AssemblyDomain;
 import org.hawkinssoftware.azia.ui.component.AbstractEventDispatch;
+import org.hawkinssoftware.azia.ui.component.ComponentEnclosure;
 import org.hawkinssoftware.azia.ui.component.ComponentRegistry;
 import org.hawkinssoftware.azia.ui.component.UserInterfaceHandler;
 import org.hawkinssoftware.azia.ui.component.cell.CellViewport;
@@ -82,7 +83,7 @@ public class ScrapMenagerieListFocusManager extends AbstractEventDispatch
 
 	@ValidateRead
 	@ValidateWrite
-	private ScrapMenagerieListViewport focused = null;
+	private ComponentEnclosure<?, ?> focused = null;
 
 	@InvocationConstraint(domains = AssemblyDomain.class)
 	private void initialize() 
@@ -100,7 +101,7 @@ public class ScrapMenagerieListFocusManager extends AbstractEventDispatch
 		KeyEventDispatch.getInstance().installHandler(new KeyHandler());
 	}
 
-	public ScrapMenagerieListViewport getFocusedList()
+	public ComponentEnclosure<?, ?> getFocusedList()
 	{
 		return focused;
 	}
@@ -198,9 +199,9 @@ public class ScrapMenagerieListFocusManager extends AbstractEventDispatch
 	 */
 	public class SetFocusAction extends UserInterfaceDirective
 	{
-		private final ScrapMenagerieListViewport activate;
+		private final ComponentEnclosure<?, ?> activate;
 
-		SetFocusAction(ScrapMenagerieListViewport activate)
+		SetFocusAction(ComponentEnclosure<?, ?> activate)
 		{
 			super(ScrapMenagerieListFocusManager.this);
 

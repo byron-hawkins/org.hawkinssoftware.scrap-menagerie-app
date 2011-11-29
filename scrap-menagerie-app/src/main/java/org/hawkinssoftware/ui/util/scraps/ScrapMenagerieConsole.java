@@ -83,7 +83,7 @@ public class ScrapMenagerieConsole
 		{
 			Log.out(Tag.CRITICAL, e, "Failed to open the console.");
 		}
-		window.setVisible(b);
+		// window.setVisible(b);
 	}
 
 	public TopTile<ScrapMenagerieComponents.LayoutKey> getTopTile()
