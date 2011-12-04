@@ -12,8 +12,6 @@ package org.hawkinssoftware.ui.util.scraps.list;
 
 import org.hawkinssoftware.azia.ui.component.cell.CellViewport;
 import org.hawkinssoftware.azia.ui.component.cell.CellViewportComposite;
-import org.hawkinssoftware.azia.ui.model.RowAddress;
-import org.hawkinssoftware.azia.ui.model.RowAddress.Section;
 import org.hawkinssoftware.azia.ui.model.list.ListDataModel;
 import org.hawkinssoftware.azia.ui.model.list.ListDataModel.ModelListDomain;
 import org.hawkinssoftware.azia.ui.paint.basic.cell.ListModelCellViewport;

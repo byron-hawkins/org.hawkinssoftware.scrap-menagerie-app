@@ -13,7 +13,6 @@ package org.hawkinssoftware.ui.util.scraps.clip;
 import java.awt.Color;
 
 import org.hawkinssoftware.azia.core.action.UserInterfaceActor.SynchronizationRole;
-import org.hawkinssoftware.azia.core.role.UserInterfaceDomains.DisplayBoundsDomain;
 import org.hawkinssoftware.azia.input.clipboard.ClipboardContents;
 import org.hawkinssoftware.azia.ui.component.AbstractComponent;
 import org.hawkinssoftware.azia.ui.component.ComponentEnclosure;
@@ -30,7 +29,6 @@ import org.hawkinssoftware.azia.ui.paint.canvas.Inset;
 import org.hawkinssoftware.azia.ui.paint.plugin.BackgroundPlugin;
 import org.hawkinssoftware.azia.ui.paint.plugin.BorderPlugin;
 import org.hawkinssoftware.azia.ui.paint.plugin.LabelTextPlugin;
-import org.hawkinssoftware.rns.core.role.DomainRole;
 
 // WIP: character '@' is truncated because it has extra-deep descent
 /**
