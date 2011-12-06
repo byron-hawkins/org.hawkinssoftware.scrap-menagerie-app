@@ -68,8 +68,8 @@ public class ScrapMenagerieConsole
 	public void display(final boolean b)
 	{
 		try
-		{
-			TransactionRegistry.executeTask(new UserInterfaceTask() {
+		{  
+			TransactionRegistry.executeTask(new UserInterfaceTask()  {
 				@Override
 				protected boolean execute()
 				{
@@ -83,8 +83,7 @@ public class ScrapMenagerieConsole
 		{
 			Log.out(Tag.CRITICAL, e, "Failed to open the console.");
 		}
-		// window.setVisible(b);
-	}
+	} 
 
 	public TopTile<ScrapMenagerieComponents.LayoutKey> getTopTile()
 	{

@@ -109,7 +109,7 @@ public class ScrapMenagerieFragmentLabel extends AbstractComposite<ScrapMenageri
 			{
 				TransactionRegistry.executeTask(new UserInterfaceTask() {
 					@Override
-					protected boolean execute()
+					protected boolean execute() 
 					{
 						GenericTransaction transaction = getTransaction(GenericTransaction.class);
 						transaction.addAction(new ChangeTextDirective(label.text, "Typing Fragments"));

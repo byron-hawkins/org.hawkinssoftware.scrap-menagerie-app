@@ -29,6 +29,7 @@ import org.hawkinssoftware.azia.ui.paint.plugin.BorderPlugin;
 import org.hawkinssoftware.azia.ui.paint.transaction.repaint.RepaintInstanceDirective;
 import org.hawkinssoftware.azia.ui.paint.transaction.repaint.RepaintRequestManager;
 import org.hawkinssoftware.rns.core.publication.InvocationConstraint;
+import org.hawkinssoftware.rns.core.role.DomainRole;
 import org.hawkinssoftware.rns.core.validation.ValidateRead;
 import org.hawkinssoftware.rns.core.validation.ValidateWrite;
 import org.hawkinssoftware.ui.util.scraps.ScrapMenagerieComponents;
@@ -56,6 +57,7 @@ public class ScrapMenagerieListFocusManager extends AbstractEventDispatch
 	 * 
 	 * @author Byron Hawkins
 	 */
+	@DomainRole.Join(membership = AssemblyDomain.class)
 	private static class InitializationTask extends InstantiationTask.StandaloneInstantiationTask
 	{
 		InitializationTask()
