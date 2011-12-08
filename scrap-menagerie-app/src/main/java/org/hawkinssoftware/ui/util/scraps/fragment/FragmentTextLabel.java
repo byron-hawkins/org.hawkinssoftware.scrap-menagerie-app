@@ -13,6 +13,7 @@ package org.hawkinssoftware.ui.util.scraps.fragment;
 import java.awt.Color;
 
 import org.hawkinssoftware.azia.core.action.UserInterfaceActor;
+import org.hawkinssoftware.azia.core.action.UserInterfaceTransaction.ActorBasedContributor.PendingTransaction;
 import org.hawkinssoftware.azia.core.role.UserInterfaceDomains.FlyweightCellDomain;
 import org.hawkinssoftware.azia.core.role.UserInterfaceDomains.RenderingDomain;
 import org.hawkinssoftware.azia.input.MouseInputEvent.Button;

@@ -13,7 +13,9 @@ package org.hawkinssoftware.ui.util.scraps.list;
 import java.awt.Color;
 
 import org.hawkinssoftware.azia.core.action.InstantiationTask;
+import org.hawkinssoftware.azia.core.action.UserInterfaceActor.SynchronizationRole;
 import org.hawkinssoftware.azia.core.action.UserInterfaceDirective;
+import org.hawkinssoftware.azia.core.action.UserInterfaceTransaction.ActorBasedContributor.PendingTransaction;
 import org.hawkinssoftware.azia.core.role.UserInterfaceDomains.AssemblyDomain;
 import org.hawkinssoftware.azia.ui.component.AbstractEventDispatch;
 import org.hawkinssoftware.azia.ui.component.ComponentEnclosure;

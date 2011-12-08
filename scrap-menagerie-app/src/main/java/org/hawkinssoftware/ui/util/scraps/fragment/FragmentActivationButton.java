@@ -14,6 +14,7 @@ import java.awt.Color;
 
 import org.hawkinssoftware.azia.core.action.UserInterfaceActor;
 import org.hawkinssoftware.azia.core.action.UserInterfaceDirective;
+import org.hawkinssoftware.azia.core.action.UserInterfaceTransaction.ActorBasedContributor.PendingTransaction;
 import org.hawkinssoftware.azia.core.role.UserInterfaceDomains.FlyweightCellDomain;
 import org.hawkinssoftware.azia.ui.component.UserInterfaceHandler;
 import org.hawkinssoftware.azia.ui.component.VirtualComponent;

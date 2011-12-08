@@ -28,6 +28,7 @@ import org.hawkinssoftware.azia.ui.model.RowAddress;
 import org.hawkinssoftware.azia.ui.model.RowAddress.Section;
 import org.hawkinssoftware.azia.ui.model.list.ListDataModel;
 import org.hawkinssoftware.azia.ui.model.list.ListDataModel.ModelListDomain;
+import org.hawkinssoftware.azia.ui.model.list.ListDataModel.ModelListWriteDomain;
 import org.hawkinssoftware.azia.ui.model.list.ListDataModelTransaction;
 import org.hawkinssoftware.azia.ui.paint.transaction.repaint.RepaintInstanceDirective;
 import org.hawkinssoftware.azia.ui.paint.transaction.repaint.RepaintRequestManager;
@@ -217,6 +218,7 @@ public class ScrapMenagerieFragmentProcessor implements UserInterfaceHandler
 	 * 
 	 * @author Byron Hawkins
 	 */
+	@DomainRole.Join(membership = ModelListWriteDomain.class)
 	private class DataChangeTask extends FragmentListTask
 	{
 		DataTransformer transformer = new DataTransformer();
@@ -238,6 +240,7 @@ public class ScrapMenagerieFragmentProcessor implements UserInterfaceHandler
 	 * 
 	 * @author Byron Hawkins
 	 */
+	@DomainRole.Join(membership = ModelListWriteDomain.class)
 	private class AddFragmentTask extends FragmentListTask
 	{
 		@Override
@@ -256,6 +259,7 @@ public class ScrapMenagerieFragmentProcessor implements UserInterfaceHandler
 	 * 
 	 * @author Byron Hawkins
 	 */
+	@DomainRole.Join(membership = ModelListWriteDomain.class)
 	private class RemoveFragmentTask extends FragmentListTask
 	{
 		private int row;

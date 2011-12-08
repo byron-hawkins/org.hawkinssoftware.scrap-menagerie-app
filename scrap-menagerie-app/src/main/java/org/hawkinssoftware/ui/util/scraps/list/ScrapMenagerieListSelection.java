@@ -67,7 +67,7 @@ public class ScrapMenagerieListSelection implements UserInterfaceHandler, UserIn
 	@Override
 	public UserInterfaceActor getActor()
 	{
-		return viewport.getComponent();
+		return viewport.getComponent().getActor();
 	}
 
 	public int getSelectedRow()

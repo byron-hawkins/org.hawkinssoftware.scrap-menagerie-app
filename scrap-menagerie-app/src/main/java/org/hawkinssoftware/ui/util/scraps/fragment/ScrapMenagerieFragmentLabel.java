@@ -286,7 +286,7 @@ public class ScrapMenagerieFragmentLabel extends AbstractComposite<ScrapMenageri
 		{
 			if (press.isPressed())
 			{
-				if (press.getButton() == addButton.getComponent())
+				if (press.getButton() == addButton.getComponent().getActor())
 				{
 					transaction.contribute(new FragmentCollectionNotification(viewport, Command.ADD));
 				}
