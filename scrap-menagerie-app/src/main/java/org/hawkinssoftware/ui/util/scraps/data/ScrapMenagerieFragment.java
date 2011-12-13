@@ -17,13 +17,15 @@ import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.hawkinssoftware.azia.input.clipboard.ClipboardContents;
+import org.hawkinssoftware.azia.ui.model.list.ListDataModel;
+import org.hawkinssoftware.azia.ui.model.list.ListDataModel.DataChange.Element;
 
 /**
  * DOC comment task awaits.
  * 
  * @author Byron Hawkins
  */
-public class ScrapMenagerieFragment implements ClipboardContents.Provider, Transferable
+public class ScrapMenagerieFragment implements ClipboardContents.Provider, Transferable, ListDataModel.DataChange.Element
 {
 	private static final DataFlavor[] DATA_FLAVORS = new DataFlavor[] { DataFlavor.stringFlavor };
 
@@ -34,7 +36,17 @@ public class ScrapMenagerieFragment implements ClipboardContents.Provider, Trans
 	private boolean active = false;
 
 	private String text = "";
-
+	
+	public ScrapMenagerieFragment()
+	{
+	}
+	
+	private ScrapMenagerieFragment(ScrapMenagerieFragment original)
+	{
+		this.active = original.active;
+		this.text = original.text;
+	}
+	
 	public boolean isActive()
 	{
 		return active;
@@ -54,7 +66,13 @@ public class ScrapMenagerieFragment implements ClipboardContents.Provider, Trans
 	{
 		this.text = text;
 	}
-
+	
+	@Override
+	public Element copy()
+	{
+		return new ScrapMenagerieFragment(this);
+	}
+	
 	@Override
 	public ClipboardContents getClipboardContents()
 	{

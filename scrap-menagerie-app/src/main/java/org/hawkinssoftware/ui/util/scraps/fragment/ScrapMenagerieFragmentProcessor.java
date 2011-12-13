@@ -137,7 +137,7 @@ public class ScrapMenagerieFragmentProcessor implements UserInterfaceHandler
 		}
 		else if ((key.event.state == State.DOWN) && key.event.isCharacter())
 		{
-			changeTask.transformer.textChange = new Append(key.event.getCharacter()); 
+			changeTask.transformer.textChange = new Append(key.event.getCharacter());
 			changeTask.schedule();
 		}
 	}
@@ -192,7 +192,7 @@ public class ScrapMenagerieFragmentProcessor implements UserInterfaceHandler
 	@DomainRole.Join(membership = ModelListDomain.class)
 	private abstract class FragmentListTask extends UserInterfaceTask
 	{
-		boolean pending = false; 
+		boolean pending = false;
 
 		void schedule()
 		{
@@ -210,7 +210,7 @@ public class ScrapMenagerieFragmentProcessor implements UserInterfaceHandler
 			{
 				Log.out(Tag.CRITICAL, "Failed to execute the fragment data change task.");
 			}
-		} 
+		}
 	}
 
 	/**
@@ -240,7 +240,7 @@ public class ScrapMenagerieFragmentProcessor implements UserInterfaceHandler
 	 * 
 	 * @author Byron Hawkins
 	 */
-	@DomainRole.Join(membership = ModelListWriteDomain.class)
+	@DomainRole.Join(membership = { ModelListWriteDomain.class, FlyweightCellDomain.class })
 	private class AddFragmentTask extends FragmentListTask
 	{
 		@Override
@@ -249,6 +249,9 @@ public class ScrapMenagerieFragmentProcessor implements UserInterfaceHandler
 			ListDataModelTransaction transaction = getTransaction(ListDataModelTransaction.class);
 			ListDataModel.Session session = model.createSession(transaction);
 			session.add(new ScrapMenagerieFragment());
+			RepaintRequestManager.requestRepaint(viewport.getCellPainter().createRepaintRequest(
+					viewport.createAddress(model.getRowCount(Section.SCROLLABLE) - 1, Section.SCROLLABLE)));
+			Log.out(Tag.DEBUG, "created repaint request for row %d", model.getRowCount(Section.SCROLLABLE) - 1);
 			pending = false;
 			return true;
 		}

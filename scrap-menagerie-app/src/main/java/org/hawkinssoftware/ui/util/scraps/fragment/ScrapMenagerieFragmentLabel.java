@@ -14,6 +14,7 @@ import java.awt.Color;
 
 import org.hawkinssoftware.azia.core.action.GenericTransaction;
 import org.hawkinssoftware.azia.core.action.TransactionRegistry;
+import org.hawkinssoftware.azia.core.action.UserInterfaceActorDelegate;
 import org.hawkinssoftware.azia.core.action.UserInterfaceActor.SynchronizationRole;
 import org.hawkinssoftware.azia.core.action.UserInterfaceTask;
 import org.hawkinssoftware.azia.core.action.UserInterfaceTask.ConcurrentAccessException;
@@ -64,7 +65,7 @@ import org.hawkinssoftware.ui.util.scraps.list.ScrapMenagerieListViewport;
  */
 public class ScrapMenagerieFragmentLabel extends AbstractComposite<ScrapMenagerieFragmentLabel.Component, ScrapMenagerieFragmentLabelPainter>
 {
-	
+
 	/**
 	 * DOC comment task awaits.
 	 * 
@@ -73,7 +74,7 @@ public class ScrapMenagerieFragmentLabel extends AbstractComposite<ScrapMenageri
 	public static class Assembly extends CompositeAssembly<Component, Painter, ScrapMenagerieFragmentLabel>
 	{
 		private static final Color BUTTON_OUTLINE_COLOR = new Color(0x8888888);
-		
+
 		private final Label.Assembly text = new Label.Assembly();
 		private final PushButton.Assembly addButton = new PushButton.TextButtonAssembly();
 		private final PushButton.Assembly removeButton = new PushButton.TextButtonAssembly();
@@ -109,7 +110,7 @@ public class ScrapMenagerieFragmentLabel extends AbstractComposite<ScrapMenageri
 			{
 				TransactionRegistry.executeTask(new UserInterfaceTask() {
 					@Override
-					protected boolean execute() 
+					protected boolean execute()
 					{
 						GenericTransaction transaction = getTransaction(GenericTransaction.class);
 						transaction.addAction(new ChangeTextDirective(label.text, "Typing Fragments"));
@@ -231,7 +232,7 @@ public class ScrapMenagerieFragmentLabel extends AbstractComposite<ScrapMenageri
 	public class Handler implements UserInterfaceHandler
 	{
 		public void mouseEvent(MouseAware.EventPass pass, PendingTransaction transaction)
-		{ 
+		{
 			if (pass.event().x() < addButton.getBounds().getPosition(Axis.H))
 			{
 				transaction.contribute(new MouseAware.Forward(text.getComponent()));
@@ -286,7 +287,7 @@ public class ScrapMenagerieFragmentLabel extends AbstractComposite<ScrapMenageri
 		{
 			if (press.isPressed())
 			{
-				if (press.getButton() == addButton.getComponent().getActor())
+				if (UserInterfaceActorDelegate.Comparator.isSameActor(press.getButton(), addButton.getComponent()))
 				{
 					transaction.contribute(new FragmentCollectionNotification(viewport, Command.ADD));
 				}
