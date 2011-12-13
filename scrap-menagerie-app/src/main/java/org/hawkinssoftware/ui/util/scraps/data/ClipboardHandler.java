@@ -43,7 +43,7 @@ import org.hawkinssoftware.ui.util.scraps.clip.CurrentClip;
 import org.hawkinssoftware.ui.util.scraps.history.ScrapMenagerieHistoryList;
 
 /**
- * DOC comment task awaits.
+ * Applies user actions to the system clipboard and responds to observed changes on the system clipboard.
  * 
  * @author Byron Hawkins
  */
@@ -74,6 +74,14 @@ public class ClipboardHandler implements UserInterfaceHandler, UserInterfaceActo
 
 	public ClipboardHandler()
 	{
+		/**
+		 * @JTourBusStop 1, ClipboardHandler, Component references are obtained without any structural references:
+		 * 
+		 *               The currentClipActor and list are obtained from the ComponentRegistry by key, so the
+		 *               ClipboardHandler needs no information about how that part of the user interface is structured.
+		 *               The references are guaranteed to be available by the time this constructor executes, making the
+		 *               ClipboardHandler free of dependencies on construction sequence.
+		 */
 		this.currentClipActor = ComponentRegistry.getInstance().getComposite(ScrapMenagerieComponents.CURRENT_CLIP_ASSEMBLY);
 		this.list = ComponentRegistry.getInstance().getComposite(ScrapMenagerieComponents.CLIP_LIST_ASSEMBLY);
 
@@ -94,7 +102,16 @@ public class ClipboardHandler implements UserInterfaceHandler, UserInterfaceActo
 		ChangeTextDirective textChange = new ChangeTextDirective(currentClipActor, summary);
 		transaction.contribute(textChange);
 
-		RepaintRequestManager.requestRepaint(new RepaintInstanceDirective(currentClipActor.getActor()));
+		/**
+		 * @JTourBusStop 2, ClipboardHandler, Repaint can be requested from any thread:
+		 * 
+		 *               This repaint request will come from a thread that monitors the system clipboard. Since all
+		 *               threads are equal in Azia, the request can be made directly from this thread. The transaction
+		 *               engine guarantees that the repaint will be executed after all transaction participants have
+		 *               made their data changes, allowing secondary responses to the ChangeTextDirective (above) to be
+		 *               free of concern about repainting the modified clip.
+		 */
+		RepaintRequestManager.requestRepaint(new RepaintInstanceDirective(currentClipActor));
 
 		try
 		{
@@ -114,6 +131,17 @@ public class ClipboardHandler implements UserInterfaceHandler, UserInterfaceActo
 		currentClip = new ScrapMenagerieItem(change.clipboardContents, CurrentClip.summarize(change.clipboardContents));
 	}
 
+	/**
+	 * @JTourBusStop 4, ClipboardHandler, Another example of guaranteed data integrity:
+	 * 
+	 *               When the user presses the Re-Copy button (or the equivalent shortcut key), this ReCopyCommand
+	 *               occurs in a transaction on the native input thread. The transaction engine automatically locks the
+	 *               ClipboardMonitor's data before executing putClipboardContents(), so that changes to the system
+	 *               clipboard during the transaction will pend until this transaction completes. Simultaneous
+	 *               transactions do have a risk of deadlock, and in that case the transaction engine chooses one of the
+	 *               contenders to terminate and retry. All client code is eligible for retry without implementing
+	 *               anything special to support it.
+	 */
 	public void reCopy(ReCopyCommand command)
 	{
 		ClipboardContents contents = command.clipboardProvider.getClipboardContents();
@@ -142,7 +170,8 @@ public class ClipboardHandler implements UserInterfaceHandler, UserInterfaceActo
 	}
 
 	/**
-	 * DOC comment task awaits.
+	 * Transactional task to add a scrap to the system clipboard. Searches existing scraps for duplicates and removes
+	 * them. If the maximum number of scraps has been exceeded, the least re-copied scrap is removed from the list.
 	 * 
 	 * @author Byron Hawkins
 	 */
@@ -161,6 +190,15 @@ public class ClipboardHandler implements UserInterfaceHandler, UserInterfaceActo
 		@Override
 		protected boolean execute()
 		{
+			/**
+			 * @JTourBusStop 3, ClipboardHandler, Concurrency is handled internally for all shared data:
+			 * 
+			 *               The list model can be accessed in the same way by any number of threads concurrently, and
+			 *               the transaction engine will guarantee data integrity for both reads and writes across the
+			 *               entire transaction. Other collaborators in this transaction have an option to see either
+			 *               the current data changes, or the original view as it appeared before this transaction
+			 *               started.
+			 */
 			ListDataModel.Session session = list.getModel().createSession(getTransaction(ListDataModelTransaction.class));
 
 			// remove dups, going in reverse order to avoid index confusion
