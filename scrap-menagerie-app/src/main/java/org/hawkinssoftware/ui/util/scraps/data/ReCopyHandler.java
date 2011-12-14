@@ -34,20 +34,35 @@ import org.hawkinssoftware.ui.util.scraps.history.ScrapMenagerieHistoryList;
 import org.hawkinssoftware.ui.util.scraps.list.ScrapMenagerieListFocusManager;
 import org.hawkinssoftware.ui.util.scraps.list.ScrapMenagerieListViewport;
 
-// WIP: what's really the distinction between ModelListDomain and FlyCellDomain?
 /**
- * DOC comment task awaits.
+ * @JTourBusStop 1, ReCopyHandler participates in mouse and keyboard transactions, Introducing the ReCopyHandler:
+ * 
+ *               The only external data operation of the Scrap Menagerie application is to put objects into the system
+ *               clipboard. This occurs when the user clicks the "Re-Copy" button, or presses the equivalent shortcut
+ *               keys on the keyboard. This role of this ReCopyHandler is to observe all user interface transactions and
+ *               respond to these re-copy triggers by contributing an action that puts the corresponding data on the
+ *               system clipboard.
  * 
  * @author Byron Hawkins
  */
 @DomainRole.Join(membership = { ModelListDomain.class, FlyweightCellDomain.class })
 public class ReCopyHandler implements UserInterfaceHandler
 {
+	/**
+	 * @JTourBusStop 2, ReCopyHandler participates in mouse and keyboard transactions, Installing the ReCopyHandler into
+	 *               the mouse and keyboard action sources:
+	 * 
+	 *               The ReCopyHandler wants to collaborate in the transactions of key events and clicks on the
+	 *               "Re-Copy" button. This is done by installing the handler into the relevant instance of
+	 *               UserInterfaceHandler.Host, in this case the KeyEventDispatch and a PushButton, respectively. Now,
+	 *               any UserInterfaceDirective (write action) or UserInterfaceNotification (readonly action) sent to
+	 *               the KeyEventDispatch or the "Re-Copy" button will be broadcast to this handler.
+	 */
 	@InvocationConstraint(domains = AssemblyDomain.class)
 	public static void install()
 	{
 		KeyEventDispatch.getInstance().installHandler(INSTANCE);
-		ComponentRegistry.getInstance().getComposite(ScrapMenagerieComponents.SELECT_BUTTON).installHandler(INSTANCE);
+		ComponentRegistry.getInstance().getComposite(ScrapMenagerieComponents.RE_COPY_BUTTON).installHandler(INSTANCE);
 	}
 
 	public static ReCopyHandler getInstance()
@@ -62,7 +77,7 @@ public class ReCopyHandler implements UserInterfaceHandler
 	private final ReCopySource clipSource;
 	private final ReCopySource fragmentSource;
 
-	public ReCopyHandler()
+	private ReCopyHandler()
 	{
 		ScrapMenagerieHistoryList clipList = ComponentRegistry.getInstance().getComposite(ScrapMenagerieComponents.CLIP_LIST_ASSEMBLY);
 		clipSource = new ReCopySource(clipList.getViewport(), clipList.getModel());
@@ -85,6 +100,16 @@ public class ReCopyHandler implements UserInterfaceHandler
 		}
 	}
 
+	/**
+	 * @JTourBusStop 3, ReCopyHandler participates in mouse and keyboard transactions, Receiving a
+	 *               KeyboardInputNotification:
+	 * 
+	 *               When the user presses any key on the keyboard, a transaction is created and a
+	 *               KeyboardInputNotification is added to it. The transaction automatically broadcasts the notification
+	 *               to this handler, as explained In stop #2. Parameter PendingTransaction is an invitation for this
+	 *               handler to collaborate by adding actions in response to the KeyboardInputNotification. If the key
+	 *               event is the re-copy shortcut key combination, then re-copy is executed.
+	 **/
 	public void keyEvent(KeyboardInputNotification key, PendingTransaction transaction)
 	{
 		if (ScrapMenagerieKeyCommand.getCommand(key.event) == ScrapMenagerieKeyCommand.RE_COPY)
@@ -93,6 +118,13 @@ public class ReCopyHandler implements UserInterfaceHandler
 		}
 	}
 
+	/**
+	 * @JTourBusStop 5, ReCopyHandler participates in mouse and keyboard transactions, Receiving a
+	 *               ChangePressedStateDirective.Notification:
+	 * 
+	 *               The process of responding to a "Re-Copy" button press is identical to that of a re-copy shortcut
+	 *               key press. The same ReCopyCommand will be added to the PendingTransaction for execution on commit.
+	 */
 	public void buttonPressed(ChangePressedStateDirective.Notification button, PendingTransaction transaction)
 	{
 		if (button.isPressed())
@@ -101,6 +133,15 @@ public class ReCopyHandler implements UserInterfaceHandler
 		}
 	}
 
+	/**
+	 * @JTourBusStop 4, ReCopyHandler participates in mouse and keyboard transactions, Contributing a ReCopyCommand:
+	 * 
+	 *               To execute a re-copy, this handler identifies the data which is to be re-copied, and adds it to the
+	 *               transaction in a ReCopyCommand directed at the ClipboardEventDispatch. This method returns without
+	 *               making any changes to the system clipboard. When all collaborators have made their contributions to
+	 *               the transaction, its actions will be executed in a sequential commit phase (4.1). The ReCopyCommand
+	 *               puts its data into the system clipboard at the time it is committed (4.2).
+	 */
 	private void reCopySelectedRow(PendingTransaction transaction)
 	{
 		ReCopySource source = getFocusedReCopySource();

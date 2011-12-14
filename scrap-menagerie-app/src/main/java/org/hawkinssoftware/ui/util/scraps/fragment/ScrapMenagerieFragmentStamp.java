@@ -75,6 +75,13 @@ public class ScrapMenagerieFragmentStamp extends AbstractCellStamp<ScrapMenageri
 		cell.addPlugin(new CellHandler(cell));
 	}
 
+	/**
+	 * @JTourBusStop 6, Stack-based properties for java.awt.Graphics, Cell stamp example - Scrap Menagerie typing
+	 *               capture:
+	 * 
+	 *               This method paints one of the typing capture cells in the scrollable list occupying the right side
+	 *               of the Scrap Menagerie window. The cell contains a small button followed by the captured text.
+	 */
 	@Override
 	protected void paint(RowAddress address, ScrapMenagerieFragment datum, InteractiveCell interactiveCell)
 	{
@@ -89,6 +96,18 @@ public class ScrapMenagerieFragmentStamp extends AbstractCellStamp<ScrapMenageri
 
 		button.paint(c, address, datum, (handler == null) ? null : handler.button);
 
+		/**
+		 * @JTourBusStop 7, Stack-based properties for java.awt.Graphics, No need to reset the graphics after painting a
+		 *               sub-component:
+		 * 
+		 *               The current graphics state includes adjustments for the scroll pane position, size, scroll
+		 *               position on both axes, list cell position and list cell size. In the method call above, the
+		 *               button is painted with no concern that it might mess up this fragile Graphics context, and no
+		 *               information about the context is passed to the button. It just paints and returns like any
+		 *               other button would. The following method calls paint the typing capture text with no concern
+		 *               for anything the button painter may have done, knowing that the graphics stack will always
+		 *               remain constant within this method.
+		 */
 		c.pushBoundsPosition(LABEL_START_X, 0);
 		label.paint(c, address, datum, (handler == null) ? null : handler.label);
 	}
@@ -109,7 +128,8 @@ public class ScrapMenagerieFragmentStamp extends AbstractCellStamp<ScrapMenageri
 	}
 
 	/**
-	 * DOC comment task awaits.
+	 * This handler is attached to a list cell when a user interaction event first occurs on it, and may be reclaimed by
+	 * the scroll pane composite any time after that.
 	 * 
 	 * @author Byron Hawkins
 	 */

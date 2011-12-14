@@ -95,7 +95,7 @@ public class ScrapMenagerieAssemblyTask extends UserInterfaceTask
 					ScrapMenagerieComponents.FRAGMENT_LIST_ASSEMBLY, window);
 
 			ComponentEnclosure<PushButton, ?> selectButtonComponent = ComponentRegistry.getInstance().establishComposite(
-					ScrapMenagerieComponents.SELECT_BUTTON, window);
+					ScrapMenagerieComponents.RE_COPY_BUTTON, window);
 			ChangeTextDirective setButtonText = new ChangeTextDirective(selectButtonComponent.getComponent(), "Re-Copy");
 			adHocTransaction.addAction(setButtonText);
 

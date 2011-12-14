@@ -75,7 +75,8 @@ public class ClipboardHandler implements UserInterfaceHandler, UserInterfaceActo
 	public ClipboardHandler()
 	{
 		/**
-		 * @JTourBusStop 1, ClipboardHandler, Component references are obtained without any structural references:
+		 * @JTourBusStop 1, ClipboardHandler - composition and concurrency, Component references are obtained without
+		 *               any structural references:
 		 * 
 		 *               The currentClipActor and list are obtained from the ComponentRegistry by key, so the
 		 *               ClipboardHandler needs no information about how that part of the user interface is structured.
@@ -103,7 +104,7 @@ public class ClipboardHandler implements UserInterfaceHandler, UserInterfaceActo
 		transaction.contribute(textChange);
 
 		/**
-		 * @JTourBusStop 2, ClipboardHandler, Repaint can be requested from any thread:
+		 * @JTourBusStop 2, ClipboardHandler - composition and concurrency, Repaint can be requested from any thread:
 		 * 
 		 *               This repaint request will come from a thread that monitors the system clipboard. Since all
 		 *               threads are equal in Azia, the request can be made directly from this thread. The transaction
@@ -132,7 +133,7 @@ public class ClipboardHandler implements UserInterfaceHandler, UserInterfaceActo
 	}
 
 	/**
-	 * @JTourBusStop 4, ClipboardHandler, Another example of guaranteed data integrity:
+	 * @JTourBusStop 4, ClipboardHandler - composition and concurrency, Another example of guaranteed data integrity:
 	 * 
 	 *               When the user presses the Re-Copy button (or the equivalent shortcut key), this ReCopyCommand
 	 *               occurs in a transaction on the native input thread. The transaction engine automatically locks the
@@ -141,6 +142,13 @@ public class ClipboardHandler implements UserInterfaceHandler, UserInterfaceActo
 	 *               transactions do have a risk of deadlock, and in that case the transaction engine chooses one of the
 	 *               contenders to terminate and retry. All client code is eligible for retry without implementing
 	 *               anything special to support it.
+	 * 
+	 * @JTourBusStop 4.2, ReCopyHandler participates in mouse and keyboard transactions, ReCopyCommand is committed:
+	 * 
+	 *               The commit() invocation on the ReCopyCommand is routed here for execution. Its data is put into the
+	 *               system clipboard at this time, and a usage count associated with the data is incremented. By
+	 *               waiting until commit to modify the system clipboard, the application guarantees that only one
+	 *               thread will attempt to set the clipboard contents at any given time.
 	 */
 	public void reCopy(ReCopyCommand command)
 	{
@@ -191,7 +199,8 @@ public class ClipboardHandler implements UserInterfaceHandler, UserInterfaceActo
 		protected boolean execute()
 		{
 			/**
-			 * @JTourBusStop 3, ClipboardHandler, Concurrency is handled internally for all shared data:
+			 * @JTourBusStop 3, ClipboardHandler - composition and concurrency, Concurrency is handled internally for
+			 *               all shared data:
 			 * 
 			 *               The list model can be accessed in the same way by any number of threads concurrently, and
 			 *               the transaction engine will guarantee data integrity for both reads and writes across the

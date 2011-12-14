@@ -143,7 +143,7 @@ public class ScrapMenagerieComponents
 	public static final ScrapMenagerieHistoryList.ScrollPaneAssembly CLIP_LIST_ASSEMBLY = new ScrapMenagerieHistoryList.ScrollPaneAssembly();
 	public static final ScrapMenagerieFragmentLabel.Assembly FRAGMENT_LABEL_ASSEMBLY = new ScrapMenagerieFragmentLabel.Assembly();
 	public static final ScrapMenagerieFragmentList.ScrollPaneAssembly FRAGMENT_LIST_ASSEMBLY = new ScrapMenagerieFragmentList.ScrollPaneAssembly();
-	public static final PushButton.Assembly SELECT_BUTTON = new PushButton.TextButtonAssembly();
+	public static final PushButton.Assembly RE_COPY_BUTTON = new PushButton.TextButtonAssembly();
 
 	private static final ScrapMenagerieComponents INSTANCE = new ScrapMenagerieComponents();
 
