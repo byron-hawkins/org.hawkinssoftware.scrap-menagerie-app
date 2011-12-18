@@ -102,6 +102,19 @@ public class FragmentActivationButton implements CompositionElement.Initializing
 		private final ToggleActiveFlagAction toggleAction = new ToggleActiveFlagAction();
 		private boolean active = false;
 
+		/**
+		 * @JTourBusStop 7.4, Usage of @DefinesIdentity in Azia, Exposure of relationships - MousePressedState installed
+		 *               in a list cell button:
+		 * 
+		 *               The MousePressedState is also used in the Scrap Menagerie fragment buttons, which appear within
+		 *               each item of the list in the right half of the application, List cells having interactive
+		 *               components must be selectively designated for user interaction, to prevent excessive memory and
+		 *               processor usage in very large lists. The resulting mechanics are quite different from a typical
+		 *               button, yet the MousePressedState can be used here without modification. The @DefinesIdentity
+		 *               policy is an essential factor in this compositional freedom; if @DefinesIdentity were violated
+		 *               for the MousePressedState, it would likely be unavailable for use in this button, and in any
+		 *               case this usage would certainly have problematic side effects.
+		 */
 		public InteractiveInstance(CellContext<ScrapMenagerieFragment> cellContext)
 		{
 			this.cellContext = cellContext;

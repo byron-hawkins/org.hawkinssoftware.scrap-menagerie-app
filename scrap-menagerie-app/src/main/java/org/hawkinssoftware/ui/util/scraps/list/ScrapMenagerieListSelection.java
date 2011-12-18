@@ -84,15 +84,15 @@ public class ScrapMenagerieListSelection implements UserInterfaceHandler, UserIn
 		switch (change.type)
 		{
 			case ADD:
-				if (selectedRow < 0)
+				if ((selectedRow < 0) && (model.getRowCount(Section.SCROLLABLE) > 0))
 				{
 					transaction.contribute(new SetSelectedRowDirective(change.address.getComponent(), 0));
 				}
 				break;
 			case REMOVE:
-				if ((selectedRow == change.address.row) && (change.address.row == (model.getRowCount(Section.SCROLLABLE) - 1)))
-				{ // the last row is being deleted, so move up one
-					transaction.contribute(new SetSelectedRowDirective(change.address.getComponent(), change.address.row - 1));
+				if (selectedRow >= model.getRowCount(Section.SCROLLABLE))
+				{ // the selected row has been deleted, so move up one
+					transaction.contribute(new SetSelectedRowDirective(change.address.getComponent(), model.getRowCount(Section.SCROLLABLE) - 1));
 				}
 				break;
 		}

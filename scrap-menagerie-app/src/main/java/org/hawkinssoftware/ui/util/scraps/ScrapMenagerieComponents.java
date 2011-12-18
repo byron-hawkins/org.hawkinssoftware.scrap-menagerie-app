@@ -37,7 +37,7 @@ import org.hawkinssoftware.ui.util.scraps.history.ScrapMenagerieHistoryList;
  */
 public class ScrapMenagerieComponents
 {
-	
+
 	/**
 	 * DOC comment task awaits.
 	 * 
@@ -111,6 +111,13 @@ public class ScrapMenagerieComponents
 		private static final String PUSHED_PIN_PATH = "images/PushpinDown.jpg";
 		private static final String PULLED_PIN_PATH = "images/PushpinUp.jpg";
 
+		/**
+		 * @JTourBusStop 7.3, Usage of @DefinesIdentity in Azia, Exposure of relationships - MousePressedState installed
+		 *               in the Scrap Menagerie "pin" button:
+		 * 
+		 *               Though the console pin of the Scrap Menagerie application is a toggle button, having a separate
+		 *               PressedStateHandler, it is still able to use the input-transitory MousePressedState.
+		 */
 		@Override
 		public void assemble(ButtonComposite<PushButton, ?> enclosure)
 		{
